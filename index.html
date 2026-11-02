@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Mm99-pAHPw7tA0lCKQCxpurX1OidT4TDcItVKcWtHnI" />
+<title>Bevuto.net — Recensioni di vino, il vino per tutti</title>
+<meta name="description" content="Recensioni di vino indipendenti, con voto in centesimi e un linguaggio semplice. Cerca un vino per nome o produttore e scopri se vale la pena.">
+<link rel="canonical" href="https://bevuto.net/">
+<meta property="og:site_name" content="Bevuto.net">
+<meta property="og:title" content="Bevuto.net — Il vino per tutti">
+<meta property="og:description" content="Recensioni di vino indipendenti, con voto in centesimi. Cerca un vino e scopri se vale la pena.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bevuto.net/">
+<meta property="og:image" content="https://bevuto.net/og-image.png">
+<meta property="og:locale" content="it_IT">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bevuto.net — Il vino per tutti">
+<meta name="twitter:description" content="Recensioni di vino indipendenti, con voto in centesimi.">
+<meta name="twitter:image" content="https://bevuto.net/og-image.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bevuto.net">
+<meta name="theme-color" content="#140a0d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+/* ============================================================
+   CONFIGURAZIONE — sostituisci i due valori qui sotto con quelli
+   del TUO progetto Supabase (Project URL e chiave "anon public").
+   Sono gli stessi che incolli nell'app personale.
+   ============================================================ */
+var SUPABASE_URL  = "https://qgwrcifctvxraatengvl.supabase.co";     // es. https://abcdxyz.supabase.co
+var SUPABASE_ANON = "sb_publishable_99dMHjYDXf1gnQ04FYJFow_NS8vPn7t";     // la chiave "anon public"
+/* ============================================================ */
+</script>
+
+<style>
+  :root{
+    --cellar:#140a0d;--cellar-2:#1d1013;--surface:#241419;--surface-2:#2c191f;
+    --line:#3a2229;--bordeaux:#7a2233;--wine:#a23246;--gold:#c9a24b;--gold-soft:#e6cd8f;
+    --parchment:#f0e7d6;--muted:#a48b83;--muted-2:#7c645f;--shadow:0 18px 50px -20px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:radial-gradient(1200px 600px at 80% -10%,#2a141a 0,transparent 60%),radial-gradient(900px 500px at -10% 110%,#21121a 0,transparent 55%),var(--cellar);color:var(--parchment);font-family:'Inter',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:26px 20px 90px}
+  header.top{padding-bottom:18px;border-bottom:1px solid var(--line)}
+  header.top h1{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:700;font-size:clamp(30px,6vw,46px);line-height:1;margin:0;letter-spacing:-0.5px}
+  header.top .sub{color:var(--gold);font-size:12px;letter-spacing:3px;text-transform:uppercase;margin-top:8px}
+  .hcount{color:var(--muted);font-size:13.5px;margin-top:10px}
+  .hcount b{color:var(--gold-soft);font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;margin-right:3px}
+  .tview{display:inline-flex;background:var(--cellar-2);border:1px solid var(--line);border-radius:999px;padding:4px;margin:22px 0 8px;gap:2px;flex-wrap:wrap}
+  .tview-btn{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:600;font-size:12.5px;padding:9px 16px;border-radius:999px;cursor:pointer;transition:.15s}
+  .tview-btn.active{background:linear-gradient(180deg,var(--surface-2),var(--surface));color:var(--parchment);box-shadow:inset 0 0 0 1px var(--line)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(216px,1fr));gap:18px;margin-top:14px}
+  .card{position:relative;background:linear-gradient(180deg,var(--surface),var(--cellar-2));border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;cursor:pointer;transition:transform .14s,border-color .14s}
+  .card.contrib{background:linear-gradient(180deg,#12211f,#0f1a1c);border:2px solid #3f6a5f}
+  .card.contrib .body{border-top:1px solid rgba(90,150,130,.14)}
+  .ctag{position:absolute;top:8px;left:8px;background:rgba(18,33,31,.82);color:#a9e0cf;border:1px solid #3f6a5f;font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:4px 9px;border-radius:999px;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+  .card:hover{transform:translateY(-3px);border-color:#4a2b33}
+  .photo{position:relative;aspect-ratio:3/4;background:repeating-linear-gradient(135deg,#20121a,#20121a 12px,#241420 12px,#241420 24px);overflow:hidden}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .photo .noimg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted-2)}
+  .photo .noimg svg{width:40px;height:40px;opacity:.5}
+  .score{position:absolute;top:10px;right:10px;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;color:#1a0e10;background:var(--gold);box-shadow:0 4px 14px -4px rgba(0,0,0,.7),inset 0 0 0 2px rgba(255,255,255,.25);border:2px solid rgba(0,0,0,.15)}
+  .score.s-none{background:#4a3a32;color:var(--muted);font-size:13px}
+  .cbadge{position:absolute;bottom:8px;right:8px;display:flex;align-items:center;gap:5px;background:rgba(20,10,13,.82);border:1px solid var(--line);color:var(--gold-soft);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+  .cbadge svg{width:12px;height:12px}
+  .body{padding:14px 15px 15px;display:flex;flex-direction:column;gap:5px;flex:1}
+  .producer{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;line-height:1.15}
+  .meta{display:flex;justify-content:space-between;gap:8px;margin-top:2px}
+  .year{color:var(--gold-soft);font-size:14px;font-weight:600;letter-spacing:1px}
+  .when{color:var(--muted);font-size:12.5px}
+
+  .giac-summary{display:flex;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin:14px 0 8px}
+  .giac-summary b{color:var(--gold-soft);font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-right:5px}
+  .giac-group{background:linear-gradient(180deg,var(--surface),var(--cellar-2));border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+  .giac-head{display:flex;align-items:center;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line)}
+  .giac-year{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--gold-soft);line-height:1;min-width:76px}
+  .giac-year.none{font-size:17px;color:var(--muted);font-family:'Inter',sans-serif}
+  .giac-year.prod{font-size:21px;min-width:0;flex:1;color:var(--parchment);word-break:break-word}
+  .giac-nums{margin-left:auto}
+  .giac-count{background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600}
+  .giac-count b{color:var(--gold);margin-right:4px}
+  .giac-bottles{display:flex;flex-direction:column}
+  .giac-bottle{display:flex;align-items:center;gap:12px;padding:11px 18px;font-size:14px;border-top:1px solid rgba(58,34,41,.5);cursor:pointer}
+  .giac-bottle:first-child{border-top:0}
+  .giac-bottle:hover{background:rgba(201,162,75,.06)}
+  .giac-bottle .bv{width:34px;height:34px;flex:0 0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#1a0e10}
+  .giac-bottle .bv.none{background:#3a2a24;color:var(--muted);font-size:11px;font-family:'Inter',sans-serif}
+  .giac-bottle .bn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .giac-bottle .by{color:var(--muted-2);font-size:12.5px;font-weight:500}
+  .giac-bottle .bp{color:var(--muted);font-size:13px}
+
+  .empty,.loading{text-align:center;padding:70px 20px;color:var(--muted)}
+  .empty h3{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--parchment);margin:0 0 8px;font-weight:500}
+  .warn{background:#2c191f;border:1px solid var(--bordeaux);border-radius:14px;padding:18px 20px;margin:20px 0;color:var(--parchment);font-size:14px;line-height:1.5}
+  .warn b{color:var(--gold-soft)}
+
+  .overlay{position:fixed;inset:0;background:rgba(8,4,6,.74);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow:auto;z-index:50}
+  .overlay.open{display:flex}
+  .modal{width:100%;max-width:560px;background:linear-gradient(180deg,var(--surface),var(--cellar-2));border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin:auto 0}
+  .m-photo{position:relative;width:100%;max-height:340px;aspect-ratio:16/10;background:#20121a;overflow:hidden}
+  .m-photo img{width:100%;height:100%;object-fit:cover}
+  .m-photo .score{top:14px;right:14px}
+  .m-close{position:absolute;top:12px;left:12px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(20,10,13,.75);color:var(--parchment);font-size:16px;cursor:pointer;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+  .m-body{padding:20px 22px 24px}
+  .m-prod{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+  .m-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;line-height:1.1;margin:2px 0 8px}
+  .m-facts{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:14px;margin-bottom:6px}
+  .m-facts b{color:var(--gold-soft);font-weight:600}
+  .m-facts a{color:var(--gold);text-decoration:none}
+  .m-sep{height:1px;background:var(--line);margin:18px 0}
+  .m-ctitle{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .comment{border-left:2px solid var(--line);padding:2px 0 2px 12px;margin-bottom:14px}
+  .comment .ca{font-weight:600;font-size:13.5px;color:var(--gold-soft)}
+  .comment .cd{font-size:11.5px;color:var(--muted-2);margin-left:8px}
+  .comment .ct{font-size:14px;color:var(--parchment);margin-top:3px;line-height:1.45;white-space:pre-wrap;word-break:break-word}
+  .no-comments{color:var(--muted-2);font-size:13.5px;margin-bottom:16px}
+  .cform label{display:block;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin:12px 0 6px}
+  .cform input,.cform textarea{width:100%;background:var(--cellar);border:1px solid var(--line);border-radius:10px;color:var(--parchment);font:inherit;font-size:15px;padding:11px 13px;resize:vertical}
+  .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,75,.15)}
+  .cbtn{margin-top:14px;background:linear-gradient(180deg,var(--wine),var(--bordeaux));color:var(--parchment);border:1px solid #93394a;border-radius:11px;font:inherit;font-weight:600;font-size:14px;padding:12px 18px;cursor:pointer;transition:.14s}
+  .cbtn:hover{filter:brightness(1.08)}
+  .cbtn:disabled{opacity:.5;cursor:not-allowed}
+  .cnote{font-size:12px;color:var(--muted-2);margin-top:10px}
+  .search{margin-top:16px}
+  .search input{width:100%;max-width:420px;background:var(--cellar-2);border:1px solid var(--line);border-radius:12px;color:var(--parchment);font:inherit;font-size:15px;padding:12px 15px}
+  .search input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,75,.15)}
+  .hactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .hbtn{background:var(--surface-2);border:1px solid var(--line);color:var(--parchment);font:inherit;font-weight:600;font-size:13px;padding:10px 16px;border-radius:999px;cursor:pointer;transition:.14s}
+  .hbtn:hover{border-color:#5a3540}
+  .hbtn.primary{background:linear-gradient(180deg,var(--wine),var(--bordeaux));border-color:#93394a}
+  .hbtn.primary:hover{filter:brightness(1.08)}
+  .legend{display:none;margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;max-width:520px}
+  .legend.open{display:block}
+  .lrow{display:flex;align-items:center;gap:12px;padding:6px 0;border-top:1px solid rgba(58,34,41,.5)}
+  .lrow:first-child{border-top:0}
+  .lscore{flex:0 0 auto;min-width:64px;text-align:center;color:#1a0e10;font-weight:700;font-size:12.5px;border-radius:999px;padding:4px 8px;font-variant-numeric:tabular-nums}
+  .lname{font-weight:600;font-size:14px;color:var(--parchment)}
+  .ldesc{color:var(--muted);font-size:13px;margin-left:auto;text-align:right}
+  .byline{font-size:11.5px;color:var(--gold);font-style:italic}
+  .about-eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+  .about-p{font-size:14.5px;line-height:1.6;color:var(--parchment);margin:0 0 18px}
+  .about-p b{color:var(--gold-soft)}
+  .about-card{display:flex;gap:12px;align-items:flex-start;background:var(--cellar);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:10px}
+  .about-card svg{width:20px;height:20px;flex:0 0 auto;color:var(--gold);margin-top:1px}
+  .about-card span{font-size:13.5px;line-height:1.5;color:var(--parchment)}
+  .m-byline{font-size:13px;color:var(--gold);font-style:italic;margin-bottom:8px}
+  .ctag-inline{display:inline-block;background:rgba(18,33,31,.9);color:#a9e0cf;border:1px solid #3f6a5f;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:10px}
+  .srow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .sub-photo{position:relative;aspect-ratio:16/10;max-height:180px;border:1.5px dashed var(--line);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--cellar);margin-bottom:6px}
+  .sub-photo:hover{border-color:var(--gold)}
+  .sub-photo img{width:100%;height:100%;object-fit:cover}
+  .sub-photo .hint{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);text-align:center;padding:0 10px}
+  .sub-photo .hint svg{width:30px;height:30px}
+  .sub-photo .hint span{font-size:12px}
+  .sub-photo input{position:absolute;inset:0;opacity:0;cursor:pointer}
+  .reactions{display:flex;gap:10px;flex-wrap:wrap;margin:2px 0 4px}
+  .creact{display:flex;gap:8px;margin-top:8px}
+  .react.sm{padding:7px 11px;font-size:12.5px;gap:6px;flex:1;justify-content:center}
+  .react.sm svg{width:14px;height:14px}
+  .react{display:inline-flex;align-items:center;gap:8px;background:var(--surface-2);border:1px solid var(--line);color:var(--parchment);font:inherit;font-size:13.5px;font-weight:600;padding:10px 15px;border-radius:999px;cursor:pointer;transition:.14s}
+  .react svg{width:16px;height:16px}
+  .react b{font-variant-numeric:tabular-nums}
+  .react:hover:not(:disabled){border-color:#5a3540}
+  .react:disabled{cursor:default;opacity:.85}
+  .react.agree.on{background:linear-gradient(180deg,#2a3a24,#20301a);border-color:#4a6a3a;color:#cfe6b8}
+  .react.dis.on{background:linear-gradient(180deg,#3a2020,#301616);border-color:#6a3a3a;color:#e6b8b8}
+  .voted-note{width:100%;font-size:11.5px;color:var(--muted-2);margin-top:2px}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--surface-2);border:1px solid var(--line);color:var(--parchment);padding:12px 20px;border-radius:999px;font-size:14px;box-shadow:var(--shadow);opacity:0;transition:.25s;pointer-events:none;z-index:60}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (max-width:520px){ .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px} .name{font-size:17px} .m-name{font-size:25px} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Bevuto.net</h1>
+    <div class="sub">Il vino per tutti</div>
+    <div class="hcount" id="hcount"></div>
+    <div class="search"><input id="q" type="search" placeholder="Cerca un vino per nome o produttore…" oninput="onSearch()" autocomplete="off"></div>
+    <div class="hactions">
+      <button class="hbtn primary" onclick="openSubmit()">＋ Proponi una degustazione</button>
+      <button class="hbtn" onclick="toggleLegend()">Legenda punteggi</button>
+      <button class="hbtn" onclick="openAbout()">Dietro le quinte</button>
+    </div>
+    <div class="legend" id="legend">
+      <div class="lrow"><span class="lscore" style="background:#e6cd8f">95–100</span><span class="lname">Eccellente</span><span class="ldesc">Vini straordinari</span></div>
+      <div class="lrow"><span class="lscore" style="background:#c9a24b">90–94</span><span class="lname">Eccezionale</span><span class="ldesc">Vini di grande qualità</span></div>
+      <div class="lrow"><span class="lscore" style="background:#c98b52">85–89</span><span class="lname">Molto buono</span><span class="ldesc"></span></div>
+      <div class="lrow"><span class="lscore" style="background:#b0794e">80–84</span><span class="lname">Buono</span><span class="ldesc">Vini ben fatti</span></div>
+      <div class="lrow"><span class="lscore" style="background:#8a6f5f">75–79</span><span class="lname">Discreto / Medio</span><span class="ldesc">Vini bevibili</span></div>
+      <div class="lrow"><span class="lscore" style="background:#5c4a44">50–74</span><span class="lname">Non consigliato</span><span class="ldesc"></span></div>
+    </div>
+  </header>
+  <div id="content"><div class="loading">Caricamento…</div></div>
+</div>
+
+<div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
+
+<div class="overlay" id="subOverlay">
+  <div class="modal">
+    <div class="m-body">
+      <div class="m-name" style="margin-bottom:6px">Proponi una degustazione</div>
+      <p class="cnote" style="margin:0 0 16px">La tua proposta sarà visibile dopo l'approvazione del curatore.</p>
+      <div class="cform">
+        <div class="sub-photo" id="subPhotoPick">
+          <div class="hint" id="subHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9a2 2 0 0 1 2-2h1.5l1-1.5h5l1 1.5H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><circle cx="12" cy="13" r="3.2"/></svg><span>Foto dell'etichetta (facoltativa)</span></div>
+          <img id="subPreview" style="display:none" alt="">
+          <input type="file" id="subPhoto" accept="image/*">
+        </div>
+        <label for="s-autore">Il tuo nome</label><input id="s-autore" type="text" maxlength="60" placeholder="Come vuoi firmarti">
+        <label for="s-prod">Produttore</label><input id="s-prod" type="text" maxlength="80" placeholder="Es. Tenuta X">
+        <label for="s-nome">Nome del vino</label><input id="s-nome" type="text" maxlength="80" placeholder="Es. Barolo Riserva">
+        <div class="srow">
+          <div><label for="s-annata">Annata</label><input id="s-annata" type="number" inputmode="numeric" placeholder="2019"></div>
+          <div><label for="s-voto">Voto (0–100)</label><input id="s-voto" type="number" inputmode="numeric" placeholder="92" min="0" max="100"></div>
+        </div>
+        <label for="s-prezzo">Prezzo € (facoltativo)</label><input id="s-prezzo" type="number" inputmode="decimal" step="0.01" min="0" placeholder="Es. 18">
+        <label for="s-locale">Locale / luogo (facoltativo)</label><input id="s-locale" type="text" maxlength="80" placeholder="Es. Enoteca Rossi">
+        <div class="modal-actions" style="display:flex;gap:10px;margin-top:18px">
+          <button class="hbtn" onclick="closeSubmit()">Annulla</button>
+          <button class="cbtn" id="s-send" style="margin-top:0;flex:1" onclick="submitTasting()">Invia proposta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="aboutOverlay">
+  <div class="modal">
+    <div class="m-body">
+      <div class="about-eyebrow">Dietro le quinte</div>
+      <div class="m-name" style="margin:2px 0 14px">Luca Fusani</div>
+      <p class="about-p">Oltre 25 anni nel mondo del vino: dall'azienda di distribuzione di famiglia alla guida della categoria vini per un grande gruppo internazionale, fino alla direzione commerciale di una storica casa spumantistica italiana. In questi anni ho selezionato e assaggiato migliaia di etichette, italiane ed estere, lavorando a stretto contatto con produttori e protagonisti del settore. Oggi metto quell'esperienza al servizio di chi ama il vino senza complicazioni: <b>Bevuto.net</b> nasce per raccontarlo in modo semplice, onesto e alla portata di tutti.</p>
+      <div class="about-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 4v5c0 4.4-3 7.5-7 9-4-1.5-7-4.6-7-9V7l7-4Z"/><path d="M9 12l2 2 4-4"/></svg><span>Le degustazioni proposte dai contributor vengono verificate e approvate da me, una a una, prima della pubblicazione.</span></div>
+      <div class="about-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3h8l-1 8a3 3 0 0 1-6 0L8 3Z"/><path d="M12 14v5"/><path d="M8.5 21h7"/></svg><span>I voti nascono solo dall'assaggio: quello che leggi è ciò che ho trovato nel bicchiere.</span></div>
+      <div class="modal-actions" style="margin-top:20px">
+        <button class="hbtn" style="width:100%" onclick="closeAbout()">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var CONFIGURED = SUPABASE_URL.indexOf('http')===0 && SUPABASE_ANON.length>20;
+var state={ view:'list', wines:[], comments:{}, reactions:{}, fotoCache:{}, current:null, query:'' };
+
+/* ---------- Supabase REST ---------- */
+function sbHeaders(){ var h={apikey:SUPABASE_ANON}; if(String(SUPABASE_ANON).indexOf('eyJ')===0){ h['Authorization']='Bearer '+SUPABASE_ANON; } return h; }
+async function sbGet(path){
+  var r=await fetch(SUPABASE_URL+'/rest/v1/'+path,{headers:sbHeaders()});
+  if(!r.ok) throw new Error('GET '+r.status);
+  return r.json();
+}
+async function sbInsert(table,row){
+  var h=sbHeaders(); h['Content-Type']='application/json'; h['Prefer']='return=minimal';
+  var r=await fetch(SUPABASE_URL+'/rest/v1/'+table,{method:'POST',headers:h,body:JSON.stringify(row)});
+  if(!r.ok) throw new Error('POST '+r.status);
+}
+
+/* ---------- helpers ---------- */
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function scoreColor(v){ if(v==null) return null; if(v>=95) return '#e6cd8f'; if(v>=90) return '#c9a24b'; if(v>=85) return '#c98b52'; if(v>=80) return '#b0794e'; return '#8a6f5f'; }
+function fmtDate(ts){ if(!ts) return ''; return new Date(Number(ts)).toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'}); }
+function fmtDateTime(iso){ try{ return new Date(iso).toLocaleDateString('it-IT',{day:'numeric',month:'short',year:'numeric'}); }catch(e){ return ''; } }
+function fmtPrice(p){ return p==null?'':'€'+Number(p).toLocaleString('it-IT',{minimumFractionDigits:p%1?2:0,maximumFractionDigits:2}); }
+var toastTimer;
+function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.classList.remove('show');},2400); }
+
+/* ---------- load ---------- */
+async function load(){
+  if(!CONFIGURED){
+    document.getElementById('content').innerHTML='<div class="warn">Il sito non è ancora configurato. Il proprietario deve inserire <b>Project URL</b> e <b>chiave anon</b> di Supabase nelle prime righe di questo file.</div>';
+    return;
+  }
+  try{
+    var baseCols='id,produttore,nome,annata,prezzo,voto,tasted_at,autore,fonte,stato,locale,lat,lng';
+    var wines;
+    try{ wines=await sbGet('degustazioni?select='+baseCols+',foto_thumb&order=tasted_at.desc.nullslast'); }
+    catch(colErr){ wines=await sbGet('degustazioni?select='+baseCols+'&order=tasted_at.desc.nullslast'); }
+    var comments=await sbGet('commenti?select=*&order=created_at.asc');
+    state.wines=wines||[];
+    state.fotoCache={};
+    state.comments={};
+    (comments||[]).forEach(function(c){ (state.comments[c.wine_id]=state.comments[c.wine_id]||[]).push(c); });
+    state.reactions={};
+    try{
+      var reacts=await sbGet('reazioni?select=wine_id,tipo');
+      (reacts||[]).forEach(function(r){ var o=state.reactions[r.wine_id]=state.reactions[r.wine_id]||{concordo:0,dissento:0}; if(r.tipo==='concordo')o.concordo++; else if(r.tipo==='dissento')o.dissento++; });
+    }catch(re){ /* tabella reazioni non ancora creata: si continua senza */ }
+    render();
+  }catch(e){
+    document.getElementById('content').innerHTML='<div class="warn">Impossibile caricare i dati. Controlla che URL e chiave siano corretti e che le tabelle esistano su Supabase.<br><small>'+esc(e.message)+'</small></div>';
+  }
+}
+async function fetchFoto(id){
+  if(id in state.fotoCache) return state.fotoCache[id];
+  try{
+    var rows=await sbGet('degustazioni?id=eq.'+encodeURIComponent(id)+'&select=foto');
+    var f=(rows&&rows[0])?rows[0].foto:null; state.fotoCache[id]=f; return f;
+  }catch(e){ state.fotoCache[id]=null; return null; }
+}
+var imgObserver=null;
+function setupLazyImages(){
+  var nodes=document.querySelectorAll('[data-fid]');
+  if(!nodes.length) return;
+  if(!('IntersectionObserver' in window)){ nodes.forEach(function(n){ loadCardImage(n); }); return; }
+  if(imgObserver) imgObserver.disconnect();
+  imgObserver=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ loadCardImage(en.target); imgObserver.unobserve(en.target); } });
+  },{rootMargin:'300px'});
+  nodes.forEach(function(n){ imgObserver.observe(n); });
+}
+async function loadCardImage(node){
+  var id=node.getAttribute('data-fid'); if(!id) return;
+  var f=await fetchFoto(id); if(!f) return;
+  var photo=node.parentElement; if(!photo) return;
+  var img=document.createElement('img'); img.src=f; img.alt='';
+  photo.insertBefore(img,node); node.remove();
+}
+function commentCount(id){ return (state.comments[id]||[]).length; }
+function onSearch(){ state.query=document.getElementById('q').value||''; render(); }
+function approvedWines(){ return state.wines.filter(function(w){ return w.stato!=='in_attesa'; }); }
+function updateCount(){
+  var n=approvedWines().length;
+  var el=document.getElementById('hcount'); if(!el) return;
+  el.innerHTML = n>0 ? ('<b>'+n+'</b> '+(n===1?'vino recensito':'vini recensiti')+' ad oggi') : '';
+}
+function applySearch(arr){
+  var q=state.query.trim().toLowerCase(); if(!q) return arr;
+  return arr.filter(function(w){ return String(w.nome||'').toLowerCase().indexOf(q)>=0 || String(w.produttore||'').toLowerCase().indexOf(q)>=0; });
+}
+function getVotes(){ try{ return JSON.parse(localStorage.getItem('voti')||'{}'); }catch(e){ return {}; } }
+function saveVote(id,tipo){ try{ var v=getVotes(); v[id]=tipo; localStorage.setItem('voti',JSON.stringify(v)); }catch(e){} }
+
+/* ---------- render ---------- */
+function toolbar(){
+  function b(v,l){ return '<button class="tview-btn'+(state.view===v?' active':'')+'" onclick="setView(\''+v+'\')">'+l+'</button>'; }
+  return '<div class="tview">'+b('list','Elenco')+b('year','Per annata')+b('producer','Per produttore')+b('contrib','Contributor')+'</div>';
+}
+function setView(v){ state.view=v; render(); }
+
+function render(){
+  updateCount();
+  var c=document.getElementById('content');
+  var approved=approvedWines();
+  if(approved.length===0){ c.innerHTML=toolbar()+'<div class="empty"><h3>Ancora nessuna degustazione</h3><p>Torna presto a trovarci.</p></div>'; return; }
+  var base = state.view==='contrib' ? approved.filter(function(w){return w.fonte==='contributore';}) : approved;
+  var list = applySearch(base);
+  if(list.length===0){
+    var h = state.view==='contrib' ? 'Nessun contributo' : 'Nessun risultato';
+    var p = state.view==='contrib' ? 'Ancora nessuna recensione proposta da altri.' : ('Nessun vino corrisponde a "'+esc(state.query)+'".');
+    c.innerHTML=toolbar()+'<div class="empty"><h3>'+h+'</h3><p>'+p+'</p></div>'; return;
+  }
+  if(state.view==='list' || state.view==='contrib') return renderList(c,list);
+  return renderGrouped(c, state.view, list);
+}
+function cardHtml(w){
+  var col=scoreColor(w.voto);
+  var badge = w.voto!=null ? '<div class="score" style="background:'+col+'">'+w.voto+'</div>' : '<div class="score s-none">n.v.</div>';
+  var cc=commentCount(w.id);
+  var cbadge = cc>0 ? '<div class="cbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.3A8 8 0 1 1 21 12Z"/></svg>'+cc+'</div>' : '';
+  var img;
+  if(state.fotoCache[w.id]) img='<img src="'+state.fotoCache[w.id]+'" alt="'+esc(w.nome)+'">';
+  else if(w.foto_thumb) img='<img src="'+w.foto_thumb+'" alt="'+esc(w.nome)+'" loading="lazy">';
+  else img='<div class="noimg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M10 2h4v5l1.5 3v10a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2V10L10 7V2Z"/></svg></div>';
+  var isC = w.fonte==='contributore';
+  var ctag = isC ? '<div class="ctag">Contributor</div>' : '';
+  return '<div class="card'+(isC?' contrib':'')+'" onclick="openDetail(\''+w.id+'\')">'+
+    '<div class="photo">'+img+badge+cbadge+ctag+'</div>'+
+    '<div class="body">'+(w.produttore?'<div class="producer">'+esc(w.produttore)+'</div>':'')+
+    '<div class="name">'+esc(w.nome)+'</div>'+
+    (isC&&w.autore?'<div class="byline">proposto da '+esc(w.autore)+'</div>':'')+
+    '<div class="meta"><span class="year">'+(w.annata?esc(w.annata):'—')+'</span><span class="when">'+fmtDate(w.tasted_at)+'</span></div>'+
+    '<div class="creact" id="cr-'+w.id+'">'+reactBtns(w.id,true)+'</div>'+
+    '</div></div>';
+}
+function renderList(c,list){
+  c.innerHTML=toolbar()+'<div class="grid">'+list.map(cardHtml).join('')+'</div>';
+}
+function renderGrouped(c, mode, list){
+  var groups={};
+  list.forEach(function(w){
+    var key = mode==='year' ? (w.annata?String(w.annata):'—') : ((w.produttore&&String(w.produttore).trim())?String(w.produttore).trim():'—');
+    (groups[key]=groups[key]||[]).push(w);
+  });
+  var keys=Object.keys(groups).sort(function(a,b){ if(a==='—')return 1; if(b==='—')return -1; return mode==='year'?(Number(b)-Number(a)):a.localeCompare(b,'it'); });
+  var distinct=keys.filter(function(k){return k!=='—';}).length;
+  var gw = mode==='year' ? (distinct===1?'annata':'annate') : (distinct===1?'produttore':'produttori');
+  var html=toolbar()+'<div class="giac-summary"><span><b>'+list.length+'</b>degustazioni</span><span><b>'+distinct+'</b>'+gw+'</span></div>';
+  keys.forEach(function(k){
+    var items=groups[k];
+    var label = k==='—' ? (mode==='year'?'Senza annata':'Senza produttore') : (mode==='year'?k:esc(k));
+    var cls = k==='—' ? 'giac-year none' : (mode==='year'?'giac-year':'giac-year prod');
+    html+='<div class="giac-group"><div class="giac-head"><div class="'+cls+'">'+label+'</div>'+
+      '<div class="giac-nums"><span class="giac-count"><b>'+items.length+'</b>'+(items.length===1?'degustazione':'degustazioni')+'</span></div></div><div class="giac-bottles">'+
+      items.map(function(w){
+        var col=scoreColor(w.voto);
+        var badge=w.voto!=null?'<span class="bv" style="background:'+col+'">'+w.voto+'</span>':'<span class="bv none">n.v.</span>';
+        var sec = mode==='year' ? (w.produttore?' <span class="by">'+esc(w.produttore)+'</span>':'') : (w.annata?' <span class="by">'+esc(w.annata)+'</span>':'');
+        var cc=commentCount(w.id); var ct = cc>0?'<span class="bp">💬 '+cc+'</span>':'';
+        return '<div class="giac-bottle" onclick="openDetail(\''+w.id+'\')"><'+'span class="bv-wrap">'+badge+'</span><span class="bn">'+esc(w.nome)+sec+'</span>'+ct+'</div>';
+      }).join('')+'</div></div>';
+  });
+  c.innerHTML=html;
+}
+
+/* ---------- detail + comments ---------- */
+function openDetail(id){
+  var w=state.wines.find(function(x){return x.id===id;}); if(!w) return;
+  state.current=id;
+  var col=scoreColor(w.voto);
+  var badge = w.voto!=null ? '<div class="score" style="background:'+col+'">'+w.voto+'</div>' : '<div class="score s-none">n.v.</div>';
+  var photo = state.fotoCache[id]
+    ? '<img src="'+state.fotoCache[id]+'" alt="'+esc(w.nome)+'">'
+    : '<div class="noimg" id="detimg" style="position:static;height:100%;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width:44px;height:44px"><path d="M10 2h4v5l1.5 3v10a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2V10L10 7V2Z"/></svg></div>';
+  var facts=[];
+  if(w.annata) facts.push('<span>Annata <b>'+esc(w.annata)+'</b></span>');
+  if(w.tasted_at) facts.push('<span>Bevuto il <b>'+fmtDate(w.tasted_at)+'</b></span>');
+  if(w.prezzo!=null && w.prezzo!=='') facts.push('<span><b>'+fmtPrice(w.prezzo)+'</b></span>');
+  if(w.locale) facts.push('<span>'+esc(w.locale)+'</span>');
+  if(w.lat!=null && w.lng!=null) facts.push('<a href="https://www.google.com/maps?q='+w.lat+','+w.lng+'" target="_blank" rel="noopener">Vedi su mappa ↗</a>');
+  document.getElementById('modal').innerHTML=
+    '<div class="m-photo">'+photo+badge+'<button class="m-close" onclick="closeDetail()">✕</button></div>'+
+    '<div class="m-body">'+(w.fonte==='contributore'?'<div class="ctag-inline">Contributor</div>':'')+(w.produttore?'<div class="m-prod">'+esc(w.produttore)+'</div>':'')+
+    '<div class="m-name">'+esc(w.nome)+'</div>'+
+    (w.fonte==='contributore'&&w.autore?'<div class="m-byline">proposto da '+esc(w.autore)+'</div>':'')+
+    '<div class="m-facts">'+facts.join('')+'</div>'+
+    '<div class="m-sep"></div>'+
+    '<div class="reactions" id="reactions"></div>'+
+    '<div class="m-sep"></div>'+
+    '<div class="m-ctitle">Commenti</div>'+
+    '<div id="commentList"></div>'+
+    '<div class="cform">'+
+      '<label for="c-name">Il tuo nome (facoltativo)</label><input id="c-name" type="text" maxlength="60" placeholder="Anonimo">'+
+      '<label for="c-text">Il tuo commento</label><textarea id="c-text" rows="3" maxlength="600" placeholder="Cosa ne pensi di questo vino?"></textarea>'+
+      '<button class="cbtn" id="c-send" onclick="sendComment()">Invia commento</button>'+
+      '<div class="cnote">I commenti sono pubblici e visibili a tutti.</div>'+
+    '</div></div>';
+  renderComments(id);
+  renderReactions(id);
+  document.getElementById('overlay').classList.add('open');
+  if(!(id in state.fotoCache)) loadDetailPhoto(id);
+}
+async function loadDetailPhoto(id){
+  var f=await fetchFoto(id); if(!f) return;
+  if(state.current!==id) return;
+  var el=document.getElementById('detimg'); if(!el) return;
+  var img=document.createElement('img'); img.src=f; img.alt='';
+  el.parentElement.insertBefore(img,el); el.remove();
+}
+var IC_UP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 22V10l5-8a2 2 0 0 1 2 2v5h5a2 2 0 0 1 2 2.3l-1.3 8A2 2 0 0 1 19 22H7Z"/><path d="M7 10H4v12h3"/></svg>';
+var IC_DOWN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17 2v12l-5 8a2 2 0 0 1-2-2v-5H5a2 2 0 0 1-2-2.3l1.3-8A2 2 0 0 1 6 2h11Z"/><path d="M17 14h3V2h-3"/></svg>';
+function reactBtns(id,small){
+  var r=state.reactions[id]||{concordo:0,dissento:0};
+  var voted=getVotes()[id]; var dis=voted?' disabled':'';
+  var cls=small?'react sm':'react';
+  var stop=small?'event.stopPropagation();':'';
+  var la=small?'':'Concordo '; var ld=small?'':'Dissento ';
+  return '<button class="'+cls+' agree'+(voted==='concordo'?' on':'')+'"'+dis+' onclick="'+stop+'react(\''+id+'\',\'concordo\')">'+IC_UP+la+'<b>'+r.concordo+'</b></button>'+
+         '<button class="'+cls+' dis'+(voted==='dissento'?' on':'')+'"'+dis+' onclick="'+stop+'react(\''+id+'\',\'dissento\')">'+IC_DOWN+ld+'<b>'+r.dissento+'</b></button>';
+}
+function renderReactions(id){
+  var el=document.getElementById('reactions'); if(!el) return;
+  var voted=getVotes()[id];
+  el.innerHTML=reactBtns(id,false)+(voted?'<div class="voted-note">Hai già espresso il tuo parere su questo vino.</div>':'');
+}
+function renderCardReactions(id){
+  var el=document.getElementById('cr-'+id); if(el) el.innerHTML=reactBtns(id,true);
+}
+async function react(id,tipo){
+  if(getVotes()[id]) return;
+  var o=state.reactions[id]=state.reactions[id]||{concordo:0,dissento:0};
+  o[tipo]++; saveVote(id,tipo); renderReactions(id); renderCardReactions(id);
+  try{ await sbInsert('reazioni',{wine_id:id,tipo:tipo}); }
+  catch(e){ o[tipo]--; try{ var v=getVotes(); delete v[id]; localStorage.setItem('voti',JSON.stringify(v)); }catch(_){} toast('Voto non registrato, riprova'); renderReactions(id); renderCardReactions(id); }
+}
+function renderComments(id){
+  var list=state.comments[id]||[];
+  var el=document.getElementById('commentList'); if(!el) return;
+  if(list.length===0){ el.innerHTML='<div class="no-comments">Ancora nessun commento. Scrivi il primo!</div>'; return; }
+  el.innerHTML=list.map(function(c){
+    return '<div class="comment"><span class="ca">'+esc(c.autore||'Anonimo')+'</span><span class="cd">'+fmtDateTime(c.created_at)+'</span><div class="ct">'+esc(c.testo)+'</div></div>';
+  }).join('');
+}
+function closeDetail(){ document.getElementById('overlay').classList.remove('open'); state.current=null; }
+document.getElementById('overlay').addEventListener('click',function(e){ if(e.target.id==='overlay') closeDetail(); });
+
+async function sendComment(){
+  var id=state.current; if(!id) return;
+  var name=document.getElementById('c-name').value.trim().slice(0,60);
+  var text=document.getElementById('c-text').value.trim().slice(0,600);
+  if(!text){ toast('Scrivi un commento prima di inviare'); return; }
+  var btn=document.getElementById('c-send'); btn.disabled=true; btn.textContent='Invio…';
+  var row={ wine_id:id, autore:name||null, testo:text };
+  try{
+    await sbInsert('commenti',row);
+    var local={ wine_id:id, autore:name||null, testo:text, created_at:new Date().toISOString() };
+    (state.comments[id]=state.comments[id]||[]).push(local);
+    document.getElementById('c-text').value='';
+    renderComments(id);
+    toast('Commento pubblicato');
+  }catch(e){ toast('Invio non riuscito, riprova'); }
+  btn.disabled=false; btn.textContent='Invia commento';
+}
+
+function toggleLegend(){ document.getElementById('legend').classList.toggle('open'); }
+function openAbout(){ document.getElementById('aboutOverlay').classList.add('open'); }
+function closeAbout(){ document.getElementById('aboutOverlay').classList.remove('open'); }
+document.getElementById('aboutOverlay').addEventListener('click',function(e){ if(e.target.id==='aboutOverlay') closeAbout(); });
+
+/* ---------- proposta di degustazione (contributor) ---------- */
+var subImg=null;
+function openSubmit(){
+  ['s-autore','s-prod','s-nome','s-annata','s-voto','s-prezzo','s-locale'].forEach(function(id){ document.getElementById(id).value=''; });
+  subImg=null; var p=document.getElementById('subPreview'); p.style.display='none'; p.src=''; document.getElementById('subHint').style.display='flex';
+  document.getElementById('subOverlay').classList.add('open');
+}
+function closeSubmit(){ document.getElementById('subOverlay').classList.remove('open'); }
+document.getElementById('subOverlay').addEventListener('click',function(e){ if(e.target.id==='subOverlay') closeSubmit(); });
+function compressImage(file,maxDim,quality){
+  maxDim=maxDim||760; quality=quality||0.72;
+  return new Promise(function(resolve,reject){
+    var reader=new FileReader();
+    reader.onload=function(e){ var img=new Image();
+      img.onload=function(){ var w=img.width,h=img.height;
+        if(w>=h&&w>maxDim){h=Math.round(h*maxDim/w);w=maxDim;} else if(h>w&&h>maxDim){w=Math.round(w*maxDim/h);h=maxDim;}
+        var c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(img,0,0,w,h);
+        try{ resolve(c.toDataURL('image/jpeg',quality)); }catch(err){ reject(err); } };
+      img.onerror=reject; img.src=e.target.result; };
+    reader.onerror=reject; reader.readAsDataURL(file);
+  });
+}
+function makeThumb(dataUrl,maxDim,quality){
+  maxDim=maxDim||130; quality=quality||0.5;
+  return new Promise(function(resolve){
+    var img=new Image();
+    img.onload=function(){ var w=img.width,h=img.height;
+      if(w>=h&&w>maxDim){h=Math.round(h*maxDim/w);w=maxDim;} else if(h>w&&h>maxDim){w=Math.round(w*maxDim/h);h=maxDim;}
+      var c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(img,0,0,w,h);
+      try{ resolve(c.toDataURL('image/jpeg',quality)); }catch(e){ resolve(null); } };
+    img.onerror=function(){ resolve(null); }; img.src=dataUrl;
+  });
+}
+document.getElementById('subPhoto').addEventListener('change', async function(e){
+  var file=e.target.files&&e.target.files[0]; if(!file) return;
+  try{ var data=await compressImage(file); subImg=data; var p=document.getElementById('subPreview'); p.src=data; p.style.display='block'; document.getElementById('subHint').style.display='none'; }
+  catch(err){ toast("Impossibile leggere l'immagine"); }
+});
+function newId(){ try{ if(crypto&&crypto.randomUUID) return 'c'+crypto.randomUUID().slice(0,12); }catch(e){} return 'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+async function submitTasting(){
+  var autore=document.getElementById('s-autore').value.trim().slice(0,60);
+  var prod=document.getElementById('s-prod').value.trim().slice(0,80);
+  var nome=document.getElementById('s-nome').value.trim().slice(0,80);
+  var annata=document.getElementById('s-annata').value.trim();
+  var votoRaw=document.getElementById('s-voto').value.trim();
+  var prezzoRaw=document.getElementById('s-prezzo').value.trim();
+  var locale=document.getElementById('s-locale').value.trim().slice(0,80);
+  if(!nome){ toast('Inserisci almeno il nome del vino'); return; }
+  if(!autore){ toast('Inserisci il tuo nome'); return; }
+  var voto=votoRaw===''?null:Math.max(0,Math.min(100,Math.round(Number(votoRaw))));
+  var prezzo=prezzoRaw===''?null:Math.max(0,Number(prezzoRaw));
+  if(prezzo!=null && isNaN(prezzo)) prezzo=null;
+  var btn=document.getElementById('s-send'); btn.disabled=true; btn.textContent='Invio…';
+  var thumb=subImg?await makeThumb(subImg):null;
+  var row={ id:newId(), produttore:prod||null, nome:nome, annata:annata||null, prezzo:prezzo,
+    voto:voto, foto:subImg||null, foto_thumb:thumb, locale:locale||null, lat:null, lng:null,
+    tasted_at:Date.now(), autore:autore, fonte:'contributore', stato:'in_attesa' };
+  try{
+    await sbInsert('degustazioni',row);
+    closeSubmit();
+    toast('Grazie! La tua proposta è in attesa di approvazione.');
+  }catch(e){ toast('Invio non riuscito, riprova'); }
+  btn.disabled=false; btn.textContent='Invia proposta';
+}
+
+load();
+</script>
+
+</body>
+</html>
