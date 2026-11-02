@@ -544,7 +544,7 @@ function compressImage(file,maxDim,quality){
   });
 }
 function makeThumb(dataUrl,maxDim,quality){
-  maxDim=maxDim||130; quality=quality||0.5;
+  maxDim=maxDim||400; quality=quality||0.72;
   return new Promise(function(resolve){
     var img=new Image();
     img.onload=function(){ var w=img.width,h=img.height;
