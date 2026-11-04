@@ -395,6 +395,7 @@ function cardHtml(w){
 }
 function renderList(c,list){
   c.innerHTML=toolbar()+'<div class="grid">'+list.map(cardHtml).join('')+'</div>';
+  setupLazyImages();
 }
 function renderGrouped(c, mode, list){
   var groups={};
