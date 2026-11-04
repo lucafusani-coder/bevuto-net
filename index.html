@@ -255,7 +255,7 @@ var SUPABASE_ANON = "sb_publishable_99dMHjYDXf1gnQ04FYJFow_NS8vPn7t";     // la 
 
 <script>
 var CONFIGURED = SUPABASE_URL.indexOf('http')===0 && SUPABASE_ANON.length>20;
-var state={ view:'list', wines:[], comments:{}, reactions:{}, fotoCache:{}, current:null, query:'' };
+var state={ view:'list', wines:[], comments:{}, reactions:{}, fotoCache:{}, thumbCache:{}, current:null, query:'' };
 
 /* ---------- Supabase REST ---------- */
 function sbHeaders(){ var h={apikey:SUPABASE_ANON}; if(String(SUPABASE_ANON).indexOf('eyJ')===0){ h['Authorization']='Bearer '+SUPABASE_ANON; } return h; }
@@ -287,12 +287,11 @@ async function load(){
   }
   try{
     var baseCols='id,produttore,nome,annata,prezzo,voto,tasted_at,autore,fonte,stato,locale,lat,lng';
-    var wines;
-    try{ wines=await sbGet('degustazioni?select='+baseCols+',foto_thumb&order=tasted_at.desc.nullslast'); }
-    catch(colErr){ wines=await sbGet('degustazioni?select='+baseCols+'&order=tasted_at.desc.nullslast'); }
+    var wines=await sbGet('degustazioni?select='+baseCols+'&order=tasted_at.desc.nullslast');
     var comments=await sbGet('commenti?select=*&order=created_at.asc');
     state.wines=wines||[];
     state.fotoCache={};
+    state.thumbCache={};
     state.comments={};
     (comments||[]).forEach(function(c){ (state.comments[c.wine_id]=state.comments[c.wine_id]||[]).push(c); });
     state.reactions={};
@@ -312,6 +311,13 @@ async function fetchFoto(id){
     var f=(rows&&rows[0])?rows[0].foto:null; state.fotoCache[id]=f; return f;
   }catch(e){ state.fotoCache[id]=null; return null; }
 }
+async function fetchThumb(id){
+  if(id in state.thumbCache) return state.thumbCache[id];
+  try{
+    var rows=await sbGet('degustazioni?id=eq.'+encodeURIComponent(id)+'&select=foto_thumb,foto');
+    var r=(rows&&rows[0])?rows[0]:null; var f=r?(r.foto_thumb||r.foto||null):null; state.thumbCache[id]=f; return f;
+  }catch(e){ state.thumbCache[id]=null; return null; }
+}
 var imgObserver=null;
 function setupLazyImages(){
   var nodes=document.querySelectorAll('[data-fid]');
@@ -325,7 +331,7 @@ function setupLazyImages(){
 }
 async function loadCardImage(node){
   var id=node.getAttribute('data-fid'); if(!id) return;
-  var f=await fetchFoto(id); if(!f) return;
+  var f=await fetchThumb(id); if(!f) return;
   var photo=node.parentElement; if(!photo) return;
   var img=document.createElement('img'); img.src=f; img.alt='';
   photo.insertBefore(img,node); node.remove();
@@ -374,8 +380,8 @@ function cardHtml(w){
   var cbadge = cc>0 ? '<div class="cbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.3A8 8 0 1 1 21 12Z"/></svg>'+cc+'</div>' : '';
   var img;
   if(state.fotoCache[w.id]) img='<img src="'+state.fotoCache[w.id]+'" alt="'+esc(w.nome)+'">';
-  else if(w.foto_thumb) img='<img src="'+w.foto_thumb+'" alt="'+esc(w.nome)+'" loading="lazy">';
-  else img='<div class="noimg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M10 2h4v5l1.5 3v10a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2V10L10 7V2Z"/></svg></div>';
+  else if(state.thumbCache[w.id]) img='<img src="'+state.thumbCache[w.id]+'" alt="'+esc(w.nome)+'">';
+  else img='<div class="noimg" data-fid="'+w.id+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M10 2h4v5l1.5 3v10a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2V10L10 7V2Z"/></svg></div>';
   var isC = w.fonte==='contributore';
   var ctag = isC ? '<div class="ctag">Contributor</div>' : '';
   return '<div class="card'+(isC?' contrib':'')+'" onclick="openDetail(\''+w.id+'\')">'+
