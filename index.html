@@ -58,7 +58,7 @@ var SUPABASE_ANON = "sb_publishable_99dMHjYDXf1gnQ04FYJFow_NS8vPn7t";     // la 
   header.top .sub{color:var(--gold-text);font-size:12px;letter-spacing:3px;text-transform:uppercase;margin-top:8px}
   .hcount{color:var(--muted);font-size:13.5px;margin-top:10px}
   .hcount b{color:var(--gold-soft);font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;margin-right:3px}
-  .tview{display:inline-flex;background:var(--cellar-2);border:1px solid var(--line);border-radius:999px;padding:4px;margin:22px 0 8px;gap:2px;flex-wrap:wrap}
+  .tview{--parchment:#F8F3EC;--muted:#dcc3aa;--line:#7a4429;--surface:#6A3018;--surface-2:#7a3a1e;display:inline-flex;background:#572D1A;border:1px solid var(--line);border-radius:999px;padding:4px;margin:22px 0 8px;gap:2px;flex-wrap:wrap}
   .tview-btn{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:600;font-size:12.5px;padding:9px 16px;border-radius:999px;cursor:pointer;transition:.15s}
   .tview-btn.active{background:linear-gradient(180deg,var(--surface-2),var(--surface));color:var(--parchment);box-shadow:inset 0 0 0 1px var(--line)}
 
@@ -181,7 +181,7 @@ var SUPABASE_ANON = "sb_publishable_99dMHjYDXf1gnQ04FYJFow_NS8vPn7t";     // la 
   .voted-note{width:100%;font-size:11.5px;color:var(--muted-2);margin-top:2px}
   .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--surface-2);border:1px solid var(--line);color:var(--parchment);padding:12px 20px;border-radius:999px;font-size:14px;box-shadow:var(--shadow);opacity:0;transition:.25s;pointer-events:none;z-index:60}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-  @media (max-width:520px){ .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px} .name{font-size:17px} .m-name{font-size:25px} }
+  @media (max-width:520px){ .tview{display:flex;width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none} .tview-btn{flex:1 1 auto;padding:9px 6px;font-size:12px;white-space:nowrap} .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px} .name{font-size:17px} .m-name{font-size:25px} }
   .ib{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:40;display:none;align-items:center;gap:12px;background:#572D1A;border:1px solid var(--line);border-radius:16px;padding:12px 12px 12px 14px;box-shadow:var(--shadow);max-width:520px;margin:0 auto;color:var(--parchment)}
   .ib.show{display:flex}
   .ib img{width:44px;height:44px;border-radius:11px;flex:none}
