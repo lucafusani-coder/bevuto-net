@@ -179,6 +179,14 @@ var SUPABASE_ANON = "sb_publishable_99dMHjYDXf1gnQ04FYJFow_NS8vPn7t";     // la 
   .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--surface-2);border:1px solid var(--line);color:var(--parchment);padding:12px 20px;border-radius:999px;font-size:14px;box-shadow:var(--shadow);opacity:0;transition:.25s;pointer-events:none;z-index:60}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   @media (max-width:520px){ .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px} .name{font-size:17px} .m-name{font-size:25px} }
+  .ib{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:40;display:none;align-items:center;gap:12px;background:linear-gradient(180deg,var(--surface-2),var(--cellar-2));border:1px solid var(--line);border-radius:16px;padding:12px 12px 12px 14px;box-shadow:var(--shadow);max-width:520px;margin:0 auto;color:var(--parchment)}
+  .ib.show{display:flex}
+  .ib img{width:44px;height:44px;border-radius:11px;flex:none;background:#fff}
+  .ib .ib-t{flex:1;min-width:0;font-size:13px;line-height:1.4;color:var(--muted)}
+  .ib .ib-t b{display:block;color:var(--parchment);font-size:14px;font-weight:600;margin-bottom:1px}
+  .ib .ib-t svg{width:15px;height:15px;vertical-align:-2px;fill:none;stroke:var(--gold-soft);stroke-width:2}
+  .ib .ib-go{flex:none;background:linear-gradient(180deg,var(--wine),var(--bordeaux));color:var(--parchment);border:1px solid #93394a;border-radius:10px;font:inherit;font-weight:600;font-size:13.5px;padding:9px 14px;cursor:pointer;display:none}
+  .ib .ib-x{flex:none;align-self:flex-start;background:transparent;border:0;color:var(--muted-2);font-size:20px;line-height:1;padding:2px 4px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -602,5 +610,54 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
+<div class="ib" id="ib" role="dialog" aria-label="Installa l'app Bevuto">
+  <img src="/icon-192.png" alt="">
+  <div class="ib-t" id="ib-t"></div>
+  <button class="ib-go" id="ib-go">Installa</button>
+  <button class="ib-x" id="ib-x" aria-label="Chiudi">×</button>
+</div>
+<script>
+(function () {
+  var KEY = 'bevuto-ib-chiuso', GIORNI = 30;
+  var standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  if (standalone) return;
+  try { var t = +localStorage.getItem(KEY); if (t && Date.now() - t < GIORNI * 864e5) return; } catch (e) {}
+
+  var ua = navigator.userAgent;
+  var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var android = /Android/.test(ua);
+  var inApp = /Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok/i.test(ua);
+  if (!ios && !android) return;
+
+  var box = document.getElementById('ib'), txt = document.getElementById('ib-t'), go = document.getElementById('ib-go');
+  var share = '<svg viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5M5 12v8h14v-8"/></svg>';
+  var prompt = null;
+
+  function chiudi() { box.classList.remove('show'); try { localStorage.setItem(KEY, Date.now()); } catch (e) {} }
+  function mostra() { setTimeout(function () { box.classList.add('show'); }, 3000); }
+  document.getElementById('ib-x').onclick = chiudi;
+
+  if (inApp) {
+    txt.innerHTML = '<b>Bevuto come app sul telefono</b>Apri bevuto.net in ' + (ios ? 'Safari' : 'Chrome') + ' dal menu ⋯ e installala da lì.';
+    mostra();
+  } else if (ios) {
+    txt.innerHTML = '<b>Installa Bevuto sul telefono</b>Tocca ' + share + ' Condividi, poi «Aggiungi alla schermata Home».';
+    mostra();
+  } else {
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault(); prompt = e;
+      txt.innerHTML = '<b>Installa Bevuto sul telefono</b>Apri le recensioni con un tocco, come un\'app.';
+      go.style.display = 'block';
+      mostra();
+    });
+    go.onclick = function () {
+      if (!prompt) return;
+      prompt.prompt();
+      prompt.userChoice.then(function () { prompt = null; chiudi(); });
+    };
+  }
+  window.addEventListener('appinstalled', chiudi);
+})();
+</script>
 </body>
 </html>
