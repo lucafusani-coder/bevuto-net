@@ -18,6 +18,7 @@
 <meta name="twitter:title" content="Bevuto.net — Il vino per tutti">
 <meta name="twitter:description" content="Recensioni di vino indipendenti, con voto in centesimi.">
 <meta name="twitter:image" content="https://bevuto.net/og-image.png">
+<link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -594,6 +595,11 @@ async function submitTasting(){
 }
 
 load();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () { navigator.serviceWorker.register("/sw.js").catch(function () {}); });
+}
 </script>
 
 </body>

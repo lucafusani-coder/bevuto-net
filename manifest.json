@@ -1,0 +1,18 @@
+{
+  "name": "Bevuto.net — Il vino per tutti",
+  "short_name": "Bevuto",
+  "description": "Recensioni di vino indipendenti, con voto in centesimi e un linguaggio semplice.",
+  "lang": "it",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#140a0d",
+  "theme_color": "#140a0d",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
