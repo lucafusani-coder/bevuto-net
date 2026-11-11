@@ -2,7 +2,7 @@
    - Pagina: prima la rete (contenuti sempre aggiornati), copia in cache solo se offline.
    - Icone, immagini del sito e font: cache.
    - Supabase e ogni richiesta non-GET: mai toccati, vanno sempre in rete. */
-var VERSION = 'bevuto-v5';
+var VERSION = 'bevuto-v6';
 var PRECACHE = ['/', '/manifest.json', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
 
 self.addEventListener('install', function (e) {
